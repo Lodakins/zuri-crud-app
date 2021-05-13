@@ -45,6 +45,8 @@ name | String
 country | String
 
 ```
+
+Request Body
 {
     "name":"polaris"
     "email":"ploar@gmail.com
