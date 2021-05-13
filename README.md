@@ -3,7 +3,7 @@
 ### Current Version
 The current version of this api is version 1 (v1)
 ### Root Endpoint
-The root end point for the api is  `https://glacial-brook-30590.herokuapp.com/v1 `
+The root end point for the api is  `https://murmuring-inlet-66798.herokuapp.com `
 
 ### Request 
 
