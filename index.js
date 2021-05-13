@@ -52,7 +52,6 @@ app.get('/user',(req,res)=>{
 });
 
 app.post("/user",(req,res)=>{
-    console.log(req.body == null);
     const email = req.body.email;
     const country = req.body.country;
     const name = req.body.name;
@@ -69,13 +68,56 @@ app.post("/user",(req,res)=>{
         country
     },(err,doc)=>{
         if(err){
-            return res.status().send(err);
+            return res.status(401).send(err);
         }
 
-        res.status(201).json({message:"Payload successfully create",data:doc});
+        res.status(201).json({message:"Payload successfully created",data:doc});
     })
 
 });
+
+app.put('/user/:id',(req,res)=>{
+    const payid= req.params.id;
+    const email = req.body.email;
+    const country = req.body.country;
+    const name = req.body.name;
+
+    if(!payid){
+        return res.status(400).json({status:false,message:"query parameter id missing."});
+    };
+
+    let obj ={};
+    if(email || country || name){
+        email  ? obj.email=email : "";
+        country  ? obj.country=country : "";
+        name  ? obj.name=name : "";
+    };
+
+        console.log(obj);
+
+    User.findByIdAndUpdate(payid,{$set:obj},{new:true}).then(result=>{
+        return res.status(201).json({message:"User successfully updated",data:result});
+        }).catch(err=>{
+        return res.status(500).json(err);
+        });
+});
+
+app.delete("/user/:id",(req,res)=>{
+
+    const payid= req.params.id;
+
+    if(!payid){
+        return res.status(400).json({status:false,message:"query param id missing."});
+    }
+
+    User.deleteOne({_id:payid}).then(result=>{
+       if(result){
+            return res.status(200).json({message:"User Deleted successfully",data:result});
+        }
+      }).catch(err=>{
+        return res.send({err});
+     }); 
+})
 
 
 
