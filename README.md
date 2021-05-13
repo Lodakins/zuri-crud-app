@@ -117,7 +117,7 @@ Sample Success Response
 }
 ```
 
-#### TUTOR TO DELETE A REGISTERED SUBJECT
+#### DELETE A PAYLOAD
 
 __DELETE  /user/:userId__
 
